@@ -11,7 +11,7 @@ export const fr = {
   },
   hero: {
     title: 'Tout Votre Marketing, En Pilote Automatique',
-    subtitle: 'Publishy crée, planifie et suit le contenu de tous vos projets – vous faisant gagner du temps et vous aidant à croître sans effort.'
+    subtitle: 'Publishy automatise la création, la planification et la publication de contenu sur les blogs, les réseaux sociaux et les newsletters. Gérez facilement plusieurs projets en parallèle tout en restant à la pointe avec des idées de contenu fraîches et pertinentes, économisant des heures chaque semaine et vous permettant de vous concentrer sur l\'essentiel.'
   },
   features: {
     automation: {
@@ -29,7 +29,20 @@ export const fr = {
     analytics: {
       title: "Suivez les performances et optimisez votre stratégie",
       description: "Obtenez des insights exploitables sur les performances de votre contenu avec les analytics de Publishy. Surveillez l'engagement, la croissance et ce qui résonne avec votre audience - pour vous concentrer sur ce qui génère des résultats."
-    }
+    },
+    content: {
+      title: "Engagez votre audience avec un contenu unique et de qualité",
+      description:
+        "Publishy génère des images époustouflantes, des vidéos captivantes et des textes percutants adaptés à votre audience. Chaque publication est conçue pour se démarquer et engager – pas de modèles, pas d'idées recyclées, seulement un contenu authentique qui représente votre marque.",
+      imageAlt: "Visuel généré pour les réseaux sociaux",
+      imageLabel: "Publication Instagram",
+      textLabel: "Tweet",
+      generatedText:
+        "🚀 Révolutionnez votre approche du fitness ! Notre plateforme alimentée par l'IA s'adapte à votre parcours unique, offrant des plans d'entraînement et des conseils nutritionnels personnalisés. Rejoignez des milliers d'utilisateurs satisfaits dès aujourd'hui ! #FitnessAI #HealthTech",
+      videoAlt: "Miniature vidéo",
+      videoTitle: "Aperçu d'une story",
+      videoDescription: "15s • Story générée",
+    },
   },
   pricing: {
     title: 'Des tarifs simples et transparents',

@@ -1,21 +1,12 @@
 'use client';
 
 import i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { ar } from './locales/ar';
-import { de } from './locales/de';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { en } from './locales/en';
-import { es } from './locales/es';
 import { fr } from './locales/fr';
-import { hi } from './locales/hi';
-import { it } from './locales/it';
-import { ja } from './locales/ja';
-import { pl } from './locales/pl';
-import { pt } from './locales/pt';
-import { ru } from './locales/ru';
-import { zh } from './locales/zh';
 
+// Initialize i18next on the client side only
 if (typeof window !== 'undefined') {
   i18n
     .use(LanguageDetector)
@@ -23,17 +14,7 @@ if (typeof window !== 'undefined') {
     .init({
       resources: {
         en: { translation: en },
-        fr: { translation: fr },
-        es: { translation: es },
-        de: { translation: de },
-        zh: { translation: zh },
-        ja: { translation: ja },
-        hi: { translation: hi },
-        ar: { translation: ar },
-        ru: { translation: ru },
-        pt: { translation: pt },
-        pl: { translation: pl },
-        it: { translation: it },
+        fr: { translation: fr }
       },
       fallbackLng: 'en',
       interpolation: {

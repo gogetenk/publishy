@@ -4,24 +4,24 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { TaskAnimation } from '../hero/task-animation';
+import { AIContentShowcase } from '../ai-generation/ai-content-showcase';
 import { useTranslation } from 'react-i18next';
 
 export function HeroSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="min-h-screen flex items-center bg-gradient-to-b from-muted/50 to-background">
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+    <section className="min-h-[90vh] flex items-center bg-gradient-to-b from-muted/50 to-background">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div 
-            className="text-left space-y-8"
+            className="text-left space-y-8 max-w-xl"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold"
+              className="text-4xl md:text-6xl font-bold leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -59,9 +59,9 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative min-h-[600px]"
+            className="relative w-full h-[700px] -mt-12"
           >
-            <TaskAnimation />
+            <AIContentShowcase />
           </motion.div>
         </div>
       </div>

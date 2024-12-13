@@ -1,34 +1,18 @@
 'use client';
 
-import { Bot } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Bot } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 
 export function Footer() {
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    setLanguage(lng);
-    document.documentElement.lang = lng;
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'fr' : 'en';
+    i18n.changeLanguage(newLang);
+    document.documentElement.lang = newLang;
   };
-
-  const languages = [
-    { code: 'en', label: '🇬🇧 English' },
-    { code: 'fr', label: '🇫🇷 Français' },
-    { code: 'es', label: '🇪🇸 Español' },
-    { code: 'de', label: '🇩🇪 Deutsch' },
-    { code: 'zh', label: '🇨🇳 中文' },
-    { code: 'ja', label: '🇯🇵 日本語' },
-    { code: 'hi', label: '🇮🇳 हिंदी' },
-    { code: 'ar', label: '🇸🇦 العربية' },
-    { code: 'it', label: '🇮🇹 Italiano' },
-    { code: 'pl', label: '🇵🇱 Polski' },
-    { code: 'pt', label: '🇵🇹 Português' },
-    { code: 'ru', label: '🇷🇺 Русский' },
-  ];
 
   return (
     <footer className="border-t py-12">
@@ -65,17 +49,14 @@ export function Footer() {
               <li><Link href="/privacy">{t('footer.privacy')}</Link></li>
               <li><Link href="/terms">{t('footer.terms')}</Link></li>
               <li>
-                <select
-                  value={language}
-                  onChange={(e) => changeLanguage(e.target.value)}
-                  className="px-2 py-1 text-sm border rounded"
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={toggleLanguage}
+                  className="px-0"
                 >
-                  {languages.map((lng) => (
-                    <option key={lng.code} value={lng.code}>
-                      {lng.label}
-                    </option>
-                  ))}
-                </select>
+                  {i18n.language === 'en' ? '🇫🇷 Français' : '🇬🇧 English'}
+                </Button>
               </li>
             </ul>
           </div>

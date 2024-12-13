@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { ExternalLink, Share2, ThumbsUp, MessageCircle } from 'lucide-react';
 import { format } from 'date-fns';
-import { ExternalLink, MessageCircle, Share2, ThumbsUp } from 'lucide-react';
 
 interface TopPost {
   id: string;
@@ -24,10 +24,6 @@ interface TopPost {
     comments: number;
   };
   url: string;
-}
-
-interface PlatformComparisonProps {
-  projectId: string; // Ajoutez cette ligne
 }
 
 const TOP_POSTS: TopPost[] = [
@@ -69,7 +65,7 @@ const TOP_POSTS: TopPost[] = [
   },
 ];
 
-export function TopPerformingPosts({ projectId }: PlatformComparisonProps) {
+export function TopPerformingPosts() {
   const getPlatformColor = (platform: string) => {
     switch (platform.toLowerCase()) {
       case 'linkedin':

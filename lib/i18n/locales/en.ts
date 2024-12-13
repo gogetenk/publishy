@@ -15,8 +15,8 @@ export const en = {
   },
   features: {
     automation: {
-      title: "Turn Your Ideas Into Published Content—Automatically.",
-      description: "From ideation to publication, Publishy creates, schedules, and publishes engaging content effortlessly."
+      title: "Publishy Handles Everything – From Ideas to Publishing",
+      description: "Publishy doesn't just create stunning social media posts and SEO-optimized blogs; it listens to the web for trending topics, scans RSS feeds, and uses your keywords to craft content perfectly aligned with the latest news and your audience's interests. All of this is scheduled and published at the best times – completely on autopilot."
     },
     branding: {
       title: "Consistent Branding Across All Your Projects",
@@ -29,7 +29,20 @@ export const en = {
     analytics: {
       title: "Track Performance and Optimize Your Strategy",
       description: "Get actionable insights into your content's performance with Publishy's analytics. Monitor engagement, growth, and what resonates with your audience – so you can focus on what drives results."
-    }
+    },
+    content: {
+      title: "Engage Your Audience with Unique, High-Quality Content",
+      description:
+        "Publishy generates stunning images, captivating videos, and compelling texts tailored to your audience. Every post is crafted to stand out and drive engagement—no templates, no recycled ideas, just authentic content that represents your brand.",
+      imageAlt: "Generated social media visual",
+      imageLabel: "Instagram Post",
+      textLabel: "Tweet",
+      generatedText:
+        "🚀 Revolutionizing the way we think about fitness! Our AI-powered platform adapts to your unique journey, providing personalized workout plans and nutrition guidance. Join thousands of satisfied users today! #FitnessAI #HealthTech",
+      videoAlt: "Video thumbnail",
+      videoTitle: "Story Preview",
+      videoDescription: "15s • Generated Story",
+    },
   },
   pricing: {
     title: 'Simple, Transparent Pricing',

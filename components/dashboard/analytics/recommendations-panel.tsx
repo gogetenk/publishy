@@ -1,11 +1,8 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb } from 'lucide-react';
-
-interface PlatformComparisonProps {
-  projectId: string; // Ajoutez cette ligne
-}
 
 const recommendations = [
   {
@@ -34,7 +31,7 @@ const recommendations = [
   },
 ];
 
-export function RecommendationsPanel({ projectId }: PlatformComparisonProps) {
+export function RecommendationsPanel() {
   return (
     <Card>
       <CardHeader>

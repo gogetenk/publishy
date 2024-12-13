@@ -6,14 +6,6 @@ import { PlanCard } from '../pricing/plan-card';
 export function PricingSection() {
   const { t } = useTranslation();
 
-  interface Plan {
-    name: string;
-    description: string;
-    features: string[];
-    price: string;
-    popular?: boolean;
-  }
-
   const plans = [
     {
       ...t('pricing.plans.free', { returnObjects: true }),

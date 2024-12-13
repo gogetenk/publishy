@@ -1,17 +1,17 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
 import { AnimatePresence, motion } from 'framer-motion';
-import { BarChart2, Bot, Calendar, Sparkles } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Bot, Calendar, BarChart2, Sparkles } from 'lucide-react';
+import { useEffect, useState, useRef  } from 'react';
+import { CalendarGrid } from './calendar/calendar-grid';
+import { CalendarDay, CalendarPost } from './calendar/types';
+import { INITIAL_POSTS, ADDITIONAL_POSTS } from './calendar/post-data';
+import { SocialPostCard } from './branding/social-post-card';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { AnimatedMetric } from './analytics/animated-metric';
 import { AnimatedChart } from './analytics/animated-chart';
 import { AnimatedInsights } from './analytics/animated-insights';
-import { AnimatedMetric } from './analytics/animated-metric';
-import { SocialPostCard } from './branding/social-post-card';
-import { CalendarGrid } from './calendar/calendar-grid';
-import { ADDITIONAL_POSTS, INITIAL_POSTS } from './calendar/post-data';
-import { CalendarDay, CalendarPost } from './calendar/types';
 
 export function AIVisual() {
   const [days, setDays] = useState<CalendarDay[]>([]);
@@ -163,7 +163,7 @@ export function ProjectsVisual() {
     return name;
   }
 
-  function generateNewTask(project: typeof INITIAL_PROJECTS[number]) {
+  function generateNewTask(project) {
     const randomPlatform = project.platforms[Math.floor(Math.random() * project.platforms.length)];
     const randomTime = `${Math.floor(Math.random() * 3) + 1}d`;
     const randomStatus = Math.random() > 0.5 ? 'scheduled' : 'draft';
