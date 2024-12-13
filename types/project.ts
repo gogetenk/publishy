@@ -2,13 +2,12 @@ export interface Project {
   id: string;
   name: string;
   description: string;
-  status: 'active' | 'archived';
   platforms: string[];
-  createdAt: Date;
-  lastActivity: Date;
-  stats: {
+  scheduledPosts: number;
+  engagementRate: number;
+  metrics: {
     totalPosts: number;
-    scheduledPosts: number;
-    engagementRate: number;
+    interactions: number;
+    averageEngagement: number;
   };
 }

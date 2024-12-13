@@ -1,5 +1,6 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -8,9 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { BarChart2, Calendar, Settings } from 'lucide-react';
 import { Project } from '@/types/project';
+import { BarChart2, Calendar, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 interface ProjectCardProps {
@@ -50,7 +50,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 Scheduled Posts
               </div>
               <div className="text-2xl font-bold">
-                {project.stats.scheduledPosts}
+                {project.scheduledPosts}
               </div>
             </div>
             <div className="space-y-2">
@@ -58,7 +58,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 Engagement Rate
               </div>
               <div className="text-2xl font-bold">
-                {project.stats.engagementRate}%
+                {project.engagementRate}%
               </div>
             </div>
           </div>
