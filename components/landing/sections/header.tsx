@@ -28,10 +28,10 @@ export function Header() {
         </nav>
         <div className="flex items-center space-x-4">
           <Button variant="ghost" asChild>
-            <Link href="/login">{t('common.signIn')}</Link>
+            <Link href="/api/auth/login">{t('common.signIn')}</Link>
           </Button>
           <Button asChild>
-            <Link href="/signup">{t('common.getStarted')}</Link>
+            <Link href="/api/auth/login">{t('common.getStarted')}</Link>
           </Button>
         </div>
       </div>

@@ -1,7 +1,10 @@
-import { Providers } from './providers';
-import './globals.css';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import './globals.css';
+import { Providers } from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
-      </body>
+      <UserProvider>
+        <body className={inter.className}>
+          <Providers>{children}</Providers>
+          <Analytics/>
+          <SpeedInsights />
+        </body>
+      </UserProvider>
     </html>
   );
 }

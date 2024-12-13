@@ -1,13 +1,25 @@
 'use client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useDashboard } from '@/hooks/use-dashboard';
 import { DashboardMetrics } from '@/components/dashboard/overview/dashboard-metrics';
 import { ProjectGrid } from '@/components/dashboard/overview/project-grid';
 import { ErrorState } from '@/components/ui/error-state';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useDashboard } from '@/hooks/use-dashboard';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function DashboardPage() {
   const { data: dashboard, isLoading, error, refetch } = useDashboard();
+  const { user, isLoading: isUserLoading } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push('/api/auth/login'); // Redirige vers la page de login si non connecté
+    }
+  }, [isLoading, user, router]);
+
+  if (!user) return null; // Empêche le rendu jusqu'à la redirection
 
   if (error) {
     return (
