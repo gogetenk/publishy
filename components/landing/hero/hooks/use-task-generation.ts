@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Task, RssFeed, Keyword, STATUS_SEQUENCE } from '../types';
+import { Task, RssFeed, Keyword } from '../types';
 import { generateTaskContent } from '../utils';
 
-const NICHES = [
-  { name: 'tech', feeds: [0, 1], keywords: [0, 1] }, // Tech & Dev
-  { name: 'pets', feeds: [2, 3], keywords: [2, 3] }, // Pet Care
-  { name: 'fitness', feeds: [4, 5], keywords: [4, 5] }, // Fitness
-];
+const PLATFORMS = ['Twitter', 'LinkedIn', 'Instagram', 'Newsletter'] as const;
+
+interface NicheConfig {
+  name: string;
+  rssFeeds: RssFeed[];
+  keywords: Keyword[];
+}
 
 export function useTaskGeneration(
   allRssFeeds: RssFeed[],
@@ -18,61 +20,85 @@ export function useTaskGeneration(
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [loopCount, setLoopCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentNicheIndex, setCurrentNicheIndex] = useState(0);
 
-  // Select current niche based on loop count
-  const currentNiche = useMemo(() => {
-    const nicheIndex = loopCount % NICHES.length;
-    const niche = NICHES[nicheIndex];
-    return {
-      ...niche,
-      rssFeeds: niche.feeds.map(i => allRssFeeds[i]),
-      keywords: niche.keywords.map(i => allKeywords[i])
-    };
-  }, [loopCount, allRssFeeds, allKeywords]);
+  // Define niches with their associated feeds and keywords
+  const niches = useMemo(() => {
+    const categories = ['tech', 'dev', 'fitness', 'pets', 'food', 'startup', 'crypto'] as const;
+    
+    return categories.map(category => ({
+      name: category,
+      rssFeeds: allRssFeeds.filter(feed => feed.category === category),
+      keywords: allKeywords.filter(keyword => keyword.category === category)
+    })).filter(niche => niche.rssFeeds.length > 0 || niche.keywords.length > 0);
+  }, [allRssFeeds, allKeywords]);
+
+  const currentNiche = useMemo(() => 
+    niches[currentNicheIndex % niches.length],
+    [niches, currentNicheIndex]
+  );
 
   const generateTask = useCallback(() => {
+    if (!currentNiche) return null;
+
     const useRss = currentTaskIndex % 2 === 0;
-    const platform = currentTaskIndex % 3 === 0 ? 'Twitter' : 'LinkedIn';
+    const platformIndex = Math.floor(Math.random() * PLATFORMS.length);
+    const platform = PLATFORMS[platformIndex];
     
-    if (useRss) {
+    if (useRss && currentNiche.rssFeeds.length > 0) {
       const feed = currentNiche.rssFeeds[currentTaskIndex % currentNiche.rssFeeds.length];
       return {
-        id: `task-${currentTaskIndex}-${loopCount}`,
+        id: `task-${currentTaskIndex}-${loopCount}-${currentNiche.name}`,
         platform,
         status: 'proposing' as const,
         content: generateTaskContent(feed, loopCount),
         source: feed.name,
       };
-    } else {
+    } else if (currentNiche.keywords.length > 0) {
       const keyword = currentNiche.keywords[currentTaskIndex % currentNiche.keywords.length];
       return {
-        id: `task-${currentTaskIndex}-${loopCount}`,
+        id: `task-${currentTaskIndex}-${loopCount}-${currentNiche.name}`,
         platform,
         status: 'proposing' as const,
         content: generateTaskContent(keyword, loopCount),
         source: keyword.term,
       };
     }
-  }, [currentTaskIndex, currentNiche, loopCount]);
+
+    return null;
+  }, [currentNiche, currentTaskIndex, loopCount]);
 
   const resetAnimation = useCallback(() => {
     setTasks([]);
     setCurrentTaskIndex(0);
     setIsCompleted(false);
+    setIsLoading(true);
     setLoopCount(prev => prev + 1);
-  }, []);
+    setCurrentNicheIndex(prev => (prev + 1) % niches.length);
+  }, [niches.length]);
+
+  // Handle loading state
+  useEffect(() => {
+    if (!isLoading) return;
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   // Generate new tasks
   useEffect(() => {
-    if (tasks.length >= 5) return;
+    if (isLoading || tasks.length >= 5) return;
 
     const taskInterval = setInterval(() => {
-      setTasks(prev => [...prev, generateTask()]);
-      setCurrentTaskIndex(prev => prev + 1);
+      const newTask = generateTask();
+      if (newTask) {
+        setTasks(prev => [...prev, newTask]);
+        setCurrentTaskIndex(prev => prev + 1);
+      }
     }, 1500);
 
     return () => clearInterval(taskInterval);
-  }, [tasks.length, generateTask]);
+  }, [tasks.length, generateTask, isLoading]);
 
   // Update task statuses
   useEffect(() => {
@@ -83,12 +109,12 @@ export function useTaskGeneration(
       
       setTasks(prev => 
         prev.map(task => {
-          const currentStatusIndex = STATUS_SEQUENCE.indexOf(task.status);
-          if (currentStatusIndex < STATUS_SEQUENCE.length - 1) {
+          const currentStatusIndex = ['proposing', 'reviewing', 'generating', 'scheduling', 'published'].indexOf(task.status);
+          if (currentStatusIndex < 4) {
             allCompleted = false;
             return {
               ...task,
-              status: STATUS_SEQUENCE[currentStatusIndex + 1]
+              status: ['proposing', 'reviewing', 'generating', 'scheduling', 'published'][currentStatusIndex + 1] as Task['status']
             };
           }
           return task;
@@ -97,7 +123,7 @@ export function useTaskGeneration(
 
       if (allCompleted && tasks.length === 5) {
         setIsCompleted(true);
-        setTimeout(resetAnimation, 3000);
+        setTimeout(resetAnimation, 2000);
       }
     }, 1500);
 
@@ -107,6 +133,7 @@ export function useTaskGeneration(
   return { 
     tasks, 
     isCompleted,
-    currentNiche: currentNiche.name
+    currentNiche: currentNiche?.name || 'tech',
+    isLoading
   };
 }

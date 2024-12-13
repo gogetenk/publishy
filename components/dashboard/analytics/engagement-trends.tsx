@@ -10,6 +10,10 @@ import {
   YAxis,
 } from 'recharts';
 
+interface EngagementTrendsProps {
+  projectId: string; // Ajoutez cette ligne
+}
+
 const data = [
   { date: 'Mar 1', engagement: 2400 },
   { date: 'Mar 5', engagement: 3600 },
@@ -20,7 +24,7 @@ const data = [
   { date: 'Mar 30', engagement: 6000 },
 ];
 
-export function EngagementTrends() {
+export function EngagementTrends({ projectId }: EngagementTrendsProps) {
   return (
     <Card className="col-span-1">
       <CardHeader>

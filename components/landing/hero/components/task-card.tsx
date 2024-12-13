@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Twitter, Linkedin, CheckCircle2 } from 'lucide-react';
+import { Twitter, Instagram, Mail, Linkedin, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Task, STATUS_SEQUENCE } from '../types';
+import { Task } from '../types';
 
 interface TaskCardProps {
   task: Task;
@@ -22,14 +22,27 @@ export function TaskCard({ task }: TaskCardProps) {
     }
   };
 
+  const getPlatformIcon = () => {
+    switch (task.platform) {
+      case 'Twitter':
+        return <Twitter className="w-5 h-5 fill-gray-700 dark:fill-gray-300" strokeWidth={0} />;
+      case 'Instagram':
+        return <Instagram className="w-5 h-5 fill-gray-700 stroke-white dark:fill-gray-300" strokeWidth={1} />;
+      case 'LinkedIn':
+        return <Linkedin className="w-5 h-5 fill-gray-700 dark:fill-gray-300" strokeWidth={1} />;
+      case 'Newsletter':
+        return <Mail className="w-5 h-5 fill-gray-700 stroke-white dark:fill-gray-300" strokeWidth={1} />;
+      case 'Blog':
+        return <FileText className="w-5 h-5 fill-gray-700 dark:fill-gray-300" strokeWidth={1} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Card className="p-4 border-2 border-primary/10 hover:border-primary/20 transition-colors shadow-sm">
       <div className="flex items-center gap-4">
-        {task.platform === 'Twitter' ? (
-          <Twitter className="w-5 h-5 fill-gray-700 dark:fill-gray-300" strokeWidth={0} />
-        ) : (
-          <Linkedin className="w-5 h-5 fill-gray-700 dark:fill-gray-300" strokeWidth={0} />
-        )}
+        {getPlatformIcon()}
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <p className="text-sm font-medium">{task.content}</p>
@@ -40,9 +53,6 @@ export function TaskCard({ task }: TaskCardProps) {
           <div className="mt-1">
             <span className={`text-xs font-medium ${getStatusColor(task.status)}`}>
               {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
-              {task.status === 'published' && (
-                <CheckCircle2 className="inline-block w-3 h-3 ml-1" />
-              )}
             </span>
           </div>
         </div>

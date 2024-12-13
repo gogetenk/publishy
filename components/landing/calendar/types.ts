@@ -1,6 +1,6 @@
 export interface CalendarPost {
   id: string;
-  platform: 'LinkedIn' | 'Twitter';
+  platform: 'LinkedIn' | 'Twitter' | 'Instagram' | 'Newsletter';
   time: string;
   title: string;
   day: number;

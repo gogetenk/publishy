@@ -4,12 +4,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Bar,
   BarChart,
+  Legend,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  Legend,
 } from 'recharts';
+
+interface PlatformComparisonProps {
+  projectId: string; // Ajoutez cette ligne
+}
+
 
 const data = [
   {
@@ -32,7 +37,7 @@ const data = [
   },
 ];
 
-export function PlatformComparison() {
+export function PlatformComparison({ projectId }: PlatformComparisonProps) {
   return (
     <Card className="col-span-1">
       <CardHeader>

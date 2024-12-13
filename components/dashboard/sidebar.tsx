@@ -58,12 +58,13 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="space-y-4 py-4 flex flex-col h-full bg-muted/50">
-      <div className="px-3 py-2">
+    <div className="flex flex-col h-full bg-muted/50">
+      {/* Logo and Navigation */}
+      <div className="flex-1 px-3 py-4">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <h1 className="text-xl font-bold">Publishy</h1>
         </Link>
-        <div className="space-y-1">
+        <nav className="space-y-1">
           {routes.map((route) => (
             <Link
               key={route.href}
@@ -79,27 +80,37 @@ export function Sidebar() {
               </div>
             </Link>
           ))}
-        </div>
+        </nav>
       </div>
-      <div className="mt-auto px-3 py-2 space-y-2">
-        <Link
-          href="/support"
-          className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition text-muted-foreground"
-        >
-          <div className="flex items-center flex-1">
-            <LifeBuoy className="h-5 w-5 mr-3" />
-            Support
-          </div>
-        </Link>
-        <button
-          className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-destructive hover:bg-destructive/10 rounded-lg transition text-muted-foreground"
-        >
-          <div className="flex items-center flex-1">
-            <LogOut className="h-5 w-5 mr-3" />
-            Logout
-          </div>
-        </button>
-        <ThemeToggle />
+
+      {/* Bottom Actions */}
+      <div className="border-t px-3 py-4">
+        <div className="space-y-2">
+          <Link
+            href="/support"
+            className={cn(
+              'text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition',
+              'text-muted-foreground'
+            )}
+          >
+            <div className="flex items-center flex-1">
+              <LifeBuoy className="h-5 w-5 mr-3" />
+              Support
+            </div>
+          </Link>
+          <button
+            className={cn(
+              'text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-destructive hover:bg-destructive/10 rounded-lg transition',
+              'text-muted-foreground'
+            )}
+          >
+            <div className="flex items-center flex-1">
+              <LogOut className="h-5 w-5 mr-3" />
+              Logout
+            </div>
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   );

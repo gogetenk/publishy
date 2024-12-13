@@ -3,17 +3,17 @@
 export interface RssFeed {
   name: string;
   url: string;
-  category: 'tech' | 'dev' | 'pets' | 'fitness' | 'food' | 'startup';
+  category: 'tech' | 'dev' | 'startup' | 'crypto' | 'fitness' | 'pets' | 'food';
 }
 
 export interface Keyword {
   term: string;
-  category: 'tech' | 'dev' | 'pets' | 'fitness' | 'food' | 'startup';
+  category: 'tech' | 'dev' | 'startup' | 'crypto' | 'fitness' | 'pets' | 'food';
 }
 
 export interface Task {
   id: string;
-  platform: 'Twitter' | 'LinkedIn';
+  platform: 'Twitter' | 'LinkedIn' | 'Instagram' | 'Newsletter' | 'Blog';
   status: 'proposing' | 'reviewing' | 'generating' | 'scheduling' | 'published';
   content: string;
   source: string;

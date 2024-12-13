@@ -2,8 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { CreateProjectDialog } from './create-project/create-project-dialog';
 import { useState } from 'react';
+import { CreateProjectDialog } from './create-project/create-project-dialog';
 
 export function CreateProjectButton() {
   const [open, setOpen] = useState(false);
@@ -14,7 +14,7 @@ export function CreateProjectButton() {
         <Plus className="h-4 w-4 mr-2" />
         New Project
       </Button>
-      <CreateProjectDialog open={open} onOpenChange={setOpen} />
+      <CreateProjectDialog isOpen={open} onOpenChange={setOpen} />
     </>
   );
 }

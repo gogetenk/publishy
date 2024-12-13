@@ -9,14 +9,6 @@ export const INITIAL_POSTS: CalendarPost[] = [
     day: 15,
     color: 'bg-blue-50 dark:bg-blue-950/50',
   },
-  {
-    id: 'post-2',
-    platform: 'Twitter',
-    time: '14:00',
-    title: 'Tech Stack Deep Dive',
-    day: 15,
-    color: 'bg-sky-50 dark:bg-sky-950/50',
-  },
 ];
 
 export const ADDITIONAL_POSTS: CalendarPost[] = [
@@ -51,5 +43,21 @@ export const ADDITIONAL_POSTS: CalendarPost[] = [
     title: 'Product Feature Preview',
     day: 25,
     color: 'bg-cyan-50 dark:bg-cyan-950/50',
+  },
+  {
+    id: 'post-7',
+    platform: 'Instagram',
+    time: '12:00',
+    title: 'Behind the Scenes',
+    day: 28,
+    color: 'bg-pink-50 dark:bg-pink-950/50',
+  },
+  {
+    id: 'post-8',
+    platform: 'Newsletter',
+    time: '14:00',
+    title: 'Monthly Update',
+    day: 30,
+    color: 'bg-amber-50 dark:bg-amber-950/50',
   },
 ];

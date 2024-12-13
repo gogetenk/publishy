@@ -9,13 +9,13 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { ProjectBasicsForm } from './project-basics-form';
 import { BrandingSetupForm } from './branding-setup-form';
 import { ContentFeedsForm } from './content-feeds-form';
-import { SocialMediaForm } from './social-media-form';
+import { ProjectBasicsForm } from './project-basics-form';
 import { ProjectReview } from './project-review';
-import { useRouter } from 'next/navigation';
+import { SocialMediaForm } from './social-media-form';
 import { ProjectFormData } from './types';
 
 const STEPS = [
@@ -26,9 +26,8 @@ const STEPS = [
   'Review',
 ];
 
-export function CreateProjectDialog() {
+export function CreateProjectDialog({ isOpen, onOpenChange }: { isOpen: boolean; onOpenChange: (open: boolean) => void }) {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<ProjectFormData>({
     basics: {
@@ -66,9 +65,8 @@ export function CreateProjectDialog() {
   };
 
   const handleCreateProject = () => {
-    // TODO: Implement project creation
     console.log('Creating project with data:', formData);
-    setOpen(false);
+    onOpenChange(false); // Ferme le dialogue après la création
     router.push('/dashboard/projects');
   };
 
@@ -116,7 +114,7 @@ export function CreateProjectDialog() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />

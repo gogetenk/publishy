@@ -9,7 +9,7 @@ import { AnimatedBot } from './components/animated-bot';
 import { useTaskGeneration } from './hooks/use-task-generation';
 
 export function TaskAnimation() {
-  const { tasks, isCompleted, currentNiche } = useTaskGeneration(RSS_FEEDS, KEYWORDS);
+  const { tasks, isCompleted, currentNiche, isLoading } = useTaskGeneration(RSS_FEEDS, KEYWORDS);
   const botPosition = tasks.length > 0 ? tasks.length - 1 : 0;
 
   // Filter sources based on current niche
@@ -30,11 +30,12 @@ export function TaskAnimation() {
       <SourceSection
         selectedRssFeeds={selectedRssFeeds}
         selectedKeywords={selectedKeywords}
+        isLoading={isLoading}
       />
 
       <div className="relative">
         <AnimatePresence mode="popLayout">
-          {tasks.map((task) => (
+          {!isLoading && tasks.map((task) => (
             <motion.div
               key={task.id}
               initial={{ opacity: 0, y: -20 }}

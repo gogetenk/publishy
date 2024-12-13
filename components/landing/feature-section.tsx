@@ -2,7 +2,6 @@
 
 import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { LucideIcon } from 'lucide-react';
 
 interface FeatureSectionProps {
   headline: string;
@@ -13,7 +12,7 @@ interface FeatureSectionProps {
 
 export function FeatureSection({ headline, description, visual, reversed }: FeatureSectionProps) {
   return (
-    <div className="py-20">
+    <section className="py-20">
       <div className="container mx-auto px-4">
         <div className={`grid md:grid-cols-2 gap-12 items-center`}>
           {!reversed ? (
@@ -33,9 +32,11 @@ export function FeatureSection({ headline, description, visual, reversed }: Feat
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="relative aspect-square"
+                className="flex items-center justify-center"
               >
-                {visual}
+                <div className="w-fit">
+                  {visual}
+                </div>
               </motion.div>
             </>
           ) : (
@@ -45,9 +46,11 @@ export function FeatureSection({ headline, description, visual, reversed }: Feat
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="relative aspect-square md:order-2"
+                className="flex items-center justify-center md:order-2"
               >
-                {visual}
+                <div className="w-fit">
+                  {visual}
+                </div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -63,6 +66,6 @@ export function FeatureSection({ headline, description, visual, reversed }: Feat
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
